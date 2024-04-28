@@ -12,7 +12,7 @@ function Header() {
 
         {/* Hambuger button */}
         <button
-          className='navbar-toggler border-light-subtle shadow-none  '
+          className='navbar-toggler border-light-subtle shadow-none'
           type='button'
           data-bs-toggle='collapse'
           data-bs-target='#navbarContent'
@@ -30,7 +30,7 @@ function Header() {
               {/* Using NavLink from react router for nav items so we have an IsActive property to set classnames based on current route */}
               <NavLink
                 to='/addsales'
-                className={({ isActive }) => (isActive ? "cus-active " : "") + "nav-link text-white-50"}
+                className={({ isActive }) => (isActive ? "active " : "") + "nav-link text-white-50"}
                 aria-current='page'
               >
                 ADD SALES
@@ -39,7 +39,7 @@ function Header() {
             <li className='nav-item'>
               <NavLink
                 to='/topsales'
-                className={({ isActive }) => (isActive ? "cus-active " : "") + "nav-link text-white-50"}
+                className={({ isActive }) => (isActive ? "active " : "") + "nav-link text-white-50"}
               >
                 TOP 5 SALES
               </NavLink>
@@ -47,23 +47,20 @@ function Header() {
             <li className='nav-item'>
               <NavLink
                 to='/totalrevenue'
-                className={({ isActive }) => (isActive ? "cus-active " : "") + "nav-link text-white-50"}
+                className={({ isActive }) => (isActive ? "active " : "") + "nav-link text-white-50"}
               >
                 TODAY&apos;S TOTAL REVENUE
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink
-                to='/login'
-                className={({ isActive }) => (isActive ? "cus-active " : "") + "nav-link text-white-50"}
-              >
+              <NavLink to='/login' className={({ isActive }) => (isActive ? "active " : "") + "nav-link text-white-50"}>
                 LOGIN
               </NavLink>
             </li>
             <li className='nav-item'>
               <NavLink
                 to='/register'
-                className={({ isActive }) => (isActive ? "cus-active " : "") + "nav-link text-white-50"}
+                className={({ isActive }) => (isActive ? "active " : "") + "nav-link text-white-50"}
               >
                 REGISTER
               </NavLink>
@@ -71,7 +68,7 @@ function Header() {
             <li className='nav-item'>
               <NavLink
                 to='/logout'
-                className={({ isActive }) => (isActive ? "cus-active " : "") + "nav-link text-white-50"}
+                className={({ isActive }) => (isActive ? "active " : "") + "nav-link text-white-50"}
               >
                 LOGOUT
               </NavLink>

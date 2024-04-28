@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header />
-      <main>
+      <main className='d-flex justify-content-center flex-column container-fluid w-100 w-md-75 p-4 gap-4'>
         <Outlet />
       </main>
     </>
