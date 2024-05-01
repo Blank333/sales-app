@@ -2,7 +2,11 @@ const Sales = require("../models/sales.model");
 
 //Fetch all sales
 exports.getAll = (req, res) => {
-  Sales.find().then((data) => res.status(200).send(data));
+  Sales.find()
+    .then((data) => res.status(200).send(data))
+    .catch((err) => {
+      return res.status(500).send(`Server Error ${err}`);
+    });
 };
 
 //Adding a new sale
@@ -33,10 +37,14 @@ exports.getRevenueToday = (req, res) => {
   const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
   //get all sales that start after midnight
-  Sales.find({ createdAt: { $gte: startOfDay } }, "amount").then((data) => {
-    let result = data.reduce((sum, item) => sum + parseInt(item.amount), 0);
-    return res.status(200).send(result.toString());
-  });
+  Sales.find({ createdAt: { $gte: startOfDay } }, "amount")
+    .then((data) => {
+      let result = data.reduce((sum, item) => sum + parseInt(item.amount), 0);
+      return res.status(200).send(result.toString());
+    })
+    .catch((err) => {
+      return res.status(500).send(`Server Error ${err}`);
+    });
 };
 
 //Get the top 5 sales
@@ -47,5 +55,8 @@ exports.getTopFive = (req, res) => {
     .limit(5)
     .then((data) => {
       return res.status(200).send(data);
+    })
+    .catch((err) => {
+      return res.status(500).send(`Server Error ${err}`);
     });
 };
