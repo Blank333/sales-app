@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const routes = require("./routes/sales.route");
+const salesRoute = require("./routes/sales.route");
 const { DB_URL } = require("./DBconfig");
 
 const app = express();
@@ -23,7 +23,7 @@ mongoose
   });
 
 //routes
-app.use("/api/sales", routes);
+app.use("/api/sales", salesRoute);
 
 //Start server
 app.listen(port, () => {

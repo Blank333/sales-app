@@ -1,5 +1,11 @@
 const sales = require("../controllers/sales.controller");
+const express = require("express");
+const router = express.Router();
 
-module.exports = (app) => {
-  app.post("/api/sales", sales.add);
-};
+//api/sales route
+router.post("/", sales.add);
+router.get("/", sales.getAll);
+router.get("/total", sales.getRevenueToday);
+router.get("/top", sales.getTopFive);
+
+module.exports = router;
