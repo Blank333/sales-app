@@ -13,6 +13,8 @@ exports.getAll = (req, res) => {
 exports.add = (req, res) => {
   const { product, quantity, amount } = req.body;
 
+  if (!product || !quantity || !amount) return res.status(400).send("Please provide all fields.");
+
   const newSale = new Sales({
     product,
     quantity: parseInt(quantity),
@@ -22,8 +24,8 @@ exports.add = (req, res) => {
   newSale
     .save()
     .then((data) => {
-      if (!data) return res.stats(400).send("Something went wrong");
-      return res.status(200).send(data);
+      if (!data) return res.status(400).send("Something went wrong");
+      return res.status(200).send("New sale added successfully");
     })
     .catch((err) => {
       return res.status(500).send(`Server Error ${err}`);

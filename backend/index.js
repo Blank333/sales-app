@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const salesRoute = require("./routes/sales.route");
+const usersRoute = require("./routes/users.route");
 const { DB_URL } = require("./DBconfig");
 
 const app = express();
@@ -24,6 +25,7 @@ mongoose
 
 //routes
 app.use("/api/sales", salesRoute);
+app.use("/api/users", usersRoute);
 
 //Start server
 app.listen(port, () => {
