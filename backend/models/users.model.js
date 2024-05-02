@@ -19,7 +19,7 @@ const usersSchema = mongoose.Schema(
           //Simple regular expression for validating email
           return /\S+@\w+\.\w+(\.\w+)?/.test(value);
         },
-        message: "Please provide a valid email address",
+        message: "Invalid email",
       },
     },
     password: {
