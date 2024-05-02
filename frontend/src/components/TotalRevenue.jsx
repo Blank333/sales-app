@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function TotalRevenue() {
-  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [totalRevenue, setTotalRevenue] = useState(-1);
   useEffect(() => {
     fetch("http://localhost:3000/api/sales/total")
       .then((res) => res.json())
@@ -16,7 +16,7 @@ function TotalRevenue() {
   return (
     <>
       <h2 className='text-center '>
-        {totalRevenue ? `TODAY'S TOTAL REVENUE IS ₹${totalRevenue}` : "Fetching details..."}
+        {totalRevenue >= 0 ? `TODAY'S TOTAL REVENUE IS ₹${totalRevenue}` : "FETCHING DETAILS..."}
       </h2>
     </>
   );

@@ -15,7 +15,7 @@ function TopSales() {
   }, []);
   return (
     <>
-      <h2 className='text-center '>{topSales.length ? "TOP 5 SALES" : "Fetching Details..."}</h2>
+      <h2 className='text-center '>{topSales.length ? "TOP 5 SALES" : "FETCHING DETAILS..."}</h2>
 
       <div className='table-responsive'>
         <table className='table'>
@@ -31,15 +31,13 @@ function TopSales() {
           <tbody className='table-group-divider'>
             {topSales.map((sale, index) => {
               return (
-                <>
-                  <tr>
-                    <th scope='row'>{index + 1}</th>
-                    <td>{sale._id}</td>
-                    <td>{sale.product}</td>
-                    <td>{sale.quantity}</td>
-                    <td>₹{sale.amount}</td>
-                  </tr>
-                </>
+                <tr key={sale._id}>
+                  <th scope='row'>{index + 1}</th>
+                  <td>{sale._id}</td>
+                  <td>{sale.product}</td>
+                  <td>{sale.quantity}</td>
+                  <td>₹{sale.amount}</td>
+                </tr>
               );
             })}
           </tbody>

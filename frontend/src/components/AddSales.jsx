@@ -35,6 +35,7 @@ function AddSales() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     }).catch((err) => {
+      setModal("Something went wrong");
       console.error(`Error fetching sales ${err}`);
     });
 
@@ -93,15 +94,14 @@ function AddSales() {
           className='btn btn-primary'
           onClick={handleSubmit}
           data-bs-toggle='modal'
-          data-bs-target='#exampleModal'
+          data-bs-target='#modal'
         >
           Submit
         </button>
       </form>
 
       {/* Modal */}
-      {/* {`modal bg-black bg-opacity-50 ${modal ? "d-block" : ""}`} */}
-      <div className='modal fade' tabIndex='-1' id='exampleModal'>
+      <div className='modal fade' tabIndex='-1' id='modal'>
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content'>
             <div className='modal-body text-center'>
