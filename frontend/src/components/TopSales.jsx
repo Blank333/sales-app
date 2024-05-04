@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function TopSales() {
   const [topSales, setTopSales] = useState([]);
+  const [title, setTitle] = useState("FETCHING DETAILS...");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/sales/top")
+    fetch("http://localhost:3000/api/sales/top", {
+      headers: { Authorization: localStorage.getItem("token") },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setTopSales(data);
+        if (data.error) {
+          setTitle(data.error);
+          return;
+        }
+        if (!data.message.length) {
+          setTitle("No sales yet!");
+        }
+        setTopSales(data.message);
       })
       .catch((err) => {
         console.error(`Error fetching sales ${err}`);
@@ -15,9 +26,15 @@ function TopSales() {
   }, []);
   return (
     <>
-      <h2 className='text-center '>{topSales.length ? "TOP 5 SALES" : "FETCHING DETAILS..."}</h2>
-
-      <div className='table-responsive'>
+      <div className='text-center'>
+        <h2>{topSales.length ? "TOP 5 SALES" : title}</h2>
+        {title.includes("No sales yet!") && (
+          <Link className='text-decoration-none' to='/addsales'>
+            <h2>Add sales here!</h2>
+          </Link>
+        )}
+      </div>
+      <div className={"table-responsive " + (topSales.length ? "" : "d-none")}>
         <table className='table'>
           <thead>
             <tr>

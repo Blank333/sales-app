@@ -1,7 +1,12 @@
 import "./Header.css";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Header() {
+  const handleLogout = () => {
+    alert("Logging out...");
+    localStorage.setItem("token", "");
+  };
+
   return (
     <header className='p-2 mb-4 bg-primary bg-gradient text-light'>
       <nav className='navbar navbar-expand-lg'>
@@ -66,12 +71,9 @@ function Header() {
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink
-                to='/logout'
-                className={({ isActive }) => (isActive ? "active " : "") + "nav-link text-white-50"}
-              >
+              <Link to='/' className='nav-link text-white-50' onClick={handleLogout}>
                 LOGOUT
-              </NavLink>
+              </Link>
             </li>
           </ul>
         </div>

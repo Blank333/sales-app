@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Modal from "./Modal";
 
 function AddSales() {
   const [data, setData] = useState({
@@ -14,8 +15,7 @@ function AddSales() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Assume product was added because the modal pops up instantly while fetching requires async operation
-    setModal("Added product successfully!");
+    setModal("Processing...");
 
     // Check for all fields
     if (!data.product || !data.quantity || !data.amount) {
@@ -32,12 +32,22 @@ function AddSales() {
     //Post data to API
     fetch("http://localhost:3000/api/sales", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: localStorage.getItem("token") },
       body: JSON.stringify(data),
-    }).catch((err) => {
-      setModal("Something went wrong");
-      console.error(`Error fetching sales ${err}`);
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.error) {
+          setModal(data.error);
+        } else {
+          setModal(data.message);
+        }
+      })
+      .catch((err) => {
+        setModal("Something went wrong");
+        console.error(`Error fetching sales ${err}`);
+      });
 
     clearForm();
   };
@@ -100,21 +110,7 @@ function AddSales() {
         </button>
       </form>
 
-      {/* Modal */}
-      <div className='modal fade' tabIndex='-1' id='modal'>
-        <div className='modal-dialog modal-dialog-centered'>
-          <div className='modal-content'>
-            <div className='modal-body text-center'>
-              <p>{modal}</p>
-            </div>
-            <div className='modal-footer d-flex justify-content-center'>
-              <button type='button' className='btn btn-secondary' data-bs-dismiss='modal'>
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Modal modal={modal} />
     </>
   );
 }
