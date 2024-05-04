@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectID } = mongoose.Schema.Types;
 
 const salesSchema = new mongoose.Schema(
   {
@@ -15,6 +16,10 @@ const salesSchema = new mongoose.Schema(
       type: Number,
       required: true,
       min: 1,
+    },
+    user: {
+      type: ObjectID,
+      ref: "Users",
     },
   },
   { timestamps: true }

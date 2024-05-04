@@ -1,5 +1,7 @@
 const Users = require("../models/users.model");
 const bcrypt = require("bcrypt");
+const { JWT_SECRET } = require("../DBconfig");
+const jwt = require("jsonwebtoken");
 
 //Get all users
 exports.getAll = (req, res) => {
@@ -59,7 +61,8 @@ exports.login = (req, res) => {
         .compare(password, user.password)
         .then((compare) => {
           if (!compare) return res.status(401).json({ error: "Invalid credentials" });
-          return res.status(200).json({ message: "Logged in successfully!" });
+          const jwtToken = jwt.sign({ _id: user._id }, JWT_SECRET);
+          return res.status(200).json({ message: "Logged in successfully!", token: jwtToken });
         })
         .catch((err) => {
           return res.status(500).json({ error: `Server Error ${err}` });
